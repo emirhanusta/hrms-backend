@@ -21,5 +21,5 @@ public class HrmsApplication {
           .select()                                  
           .apis(RequestHandlerSelectors.basePackage("hrms.hrms"))                          
           .build();                                           
-    }//2.15
+    }
 }

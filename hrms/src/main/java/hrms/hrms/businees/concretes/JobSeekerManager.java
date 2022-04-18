@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import hrms.hrms.businees.abstracts.JobSeekerService;
 import hrms.hrms.core.utilities.results.DataResult;
+import hrms.hrms.core.utilities.results.ErrorResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.core.utilities.results.SuccessResult;
@@ -34,8 +35,11 @@ public class JobSeekerManager implements JobSeekerService{
 
 	@Override
 	public Result add(JobSeeker jobSeeker) {
-		this.jobSeekerDao.save(jobSeeker);
-		return new SuccessResult("Job Seeker Added");
+		if(this.jobSeekerDao.existsByEmail(jobSeeker.getEmail())) {
+			return new ErrorResult("This e-mail address is in use. Register with another address.");
+		} else {
+			this.jobSeekerDao.save(jobSeeker);
+			return new SuccessResult("Job Seeker Registired.");
+			}
 	}
-
 }
