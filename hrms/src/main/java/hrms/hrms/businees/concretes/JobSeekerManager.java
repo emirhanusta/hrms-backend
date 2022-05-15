@@ -12,7 +12,6 @@ import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.core.utilities.results.SuccessResult;
 import hrms.hrms.dataAccess.abstracts.JobSeekerDao;
-import hrms.hrms.entities.concretes.JobPosition;
 import hrms.hrms.entities.concretes.JobSeeker;
 
 @Service
