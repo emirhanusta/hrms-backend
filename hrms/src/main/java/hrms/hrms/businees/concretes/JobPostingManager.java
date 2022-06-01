@@ -3,6 +3,7 @@ package hrms.hrms.businees.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import hrms.hrms.businees.abstracts.JobPostingService;
 import hrms.hrms.core.utilities.results.DataResult;
@@ -11,7 +12,12 @@ import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.dataAccess.abstracts.JobPostingDao;
 import hrms.hrms.entities.concretes.JobPosting;
 
+@Service
 public class JobPostingManager implements JobPostingService{
+	public @interface EnableFeignClients {
+
+	}
+
 	private JobPostingDao jobPostingDao;
 	
 	@Autowired

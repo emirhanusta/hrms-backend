@@ -3,17 +3,17 @@ package hrms.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.hrms.businees.abstracts.JobPostingService;
 import hrms.hrms.core.utilities.results.DataResult;
+import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.JobPosting;
-@CrossOrigin
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/job_posting")
@@ -26,9 +26,24 @@ public class JobPostingController {
 		this.jobPostingService = jobPostingService;
 	}
 	
-
+	@PostMapping(value="/add")
+	public Result add(@RequestBody JobPosting jobPosting) {
+		return this.jobPostingService.add(jobPosting);
+		
+	}
+	
     @GetMapping(value = "/getAllByIsActiveTrue")
-    public DataResult<List<JobPosting>> getAll(){ 
+    public DataResult<List<JobPosting>> getAllByIsActiveTrue(){ 
     	return this.jobPostingService.getAllByIsActiveTrue(); 
     	}
+    
+    @GetMapping(value="/getAllByIsActiveTrueAndEmployer")
+    public DataResult<List<JobPosting>> getAllByIsActiveTrueAndEmployer(int employerId){
+    	return this.jobPostingService.getAllByIsActiveTrueAndEmployer(employerId);
+    }
+    
+    @GetMapping(value="/getAllByIsActiveTrueOrderByDeadlineDesc")
+    public DataResult<List<JobPosting>> getAllByIsActiveTrueOrderByDeadlineDesc(){
+    	return this.jobPostingService.getAllByIsActiveTrueOrderByDeadlineDesc();
+    }
 }
