@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,12 +22,13 @@ import lombok.NoArgsConstructor;
 @Table(name="job_postings")
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class JobPosting {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	
-	@Column(name="id")
-	private int id;
+	@Column(name="job_posting_id")
+	private int jobPostingId;
 	
 	@Column(name="description")
 	private String description;

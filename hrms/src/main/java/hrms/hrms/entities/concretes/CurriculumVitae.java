@@ -41,4 +41,7 @@ public class CurriculumVitae {
     
     @OneToOne(mappedBy = "curriculumVitae")
     private Image image;
+    
+    @OneToMany(mappedBy = "curriculumVitae")
+    private List<Skill> skill;
 }

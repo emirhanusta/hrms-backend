@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.hrms.businees.abstracts.JobPostingService;
@@ -31,7 +32,10 @@ public class JobPostingController {
 		return this.jobPostingService.add(jobPosting);
 		
 	}
-	
+    @GetMapping("/getById")
+    public DataResult<JobPosting> getById(@RequestParam int id){
+        return jobPostingService.getById(id);
+    }
     @GetMapping(value = "/getAllByIsActiveTrue")
     public DataResult<List<JobPosting>> getAllByIsActiveTrue(){ 
     	return this.jobPostingService.getAllByIsActiveTrue(); 
@@ -45,5 +49,10 @@ public class JobPostingController {
     @GetMapping(value="/getAllByIsActiveTrueOrderByDeadlineDesc")
     public DataResult<List<JobPosting>> getAllByIsActiveTrueOrderByDeadlineDesc(){
     	return this.jobPostingService.getAllByIsActiveTrueOrderByDeadlineDesc();
+    }
+    
+    @PostMapping("/changeToUnActive")
+    public Result changeToUnActive( int id) {
+        return this.jobPostingService.changeToUnActive(id);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import hrms.hrms.entities.concretes.JobPosting;
 
 public interface JobPostingDao extends JpaRepository<JobPosting,Integer>{
+	JobPosting findById(int id);
 
 	List<JobPosting> getAllByIsActiveTrue();
 	List<JobPosting> getAllByIsActiveTrueAndEmployer(int employerId);

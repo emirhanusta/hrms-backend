@@ -8,9 +8,12 @@ import hrms.hrms.entities.concretes.JobPosting;
 
 public interface JobPostingService {
 	Result add(JobPosting jobPosting);
+    DataResult<JobPosting>getById(int id);
+
 	DataResult<List<JobPosting>> getAllByIsActiveTrue();
 	DataResult<List<JobPosting>> getAllByIsActiveTrueAndEmployer(int employerId);
 	DataResult<List<JobPosting>> getAllByIsActiveTrueOrderByDeadlineDesc();
-	Result setDeactivateJobAdvertisement(int id);
-	Result setActivateJobAdvertisement(int id);
+
+    Result changeToUnActive(int id);
+
 }
