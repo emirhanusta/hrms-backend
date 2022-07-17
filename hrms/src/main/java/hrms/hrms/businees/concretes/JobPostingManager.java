@@ -16,9 +16,6 @@ import hrms.hrms.entities.concretes.JobPosting;
 
 @Service
 public class JobPostingManager implements JobPostingService{
-	public @interface EnableFeignClients {
-
-	}
 
 	private JobPostingDao jobPostingDao;
 	

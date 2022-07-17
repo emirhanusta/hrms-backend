@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 public class CurriculumVitae {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	
 	@Column(name="cv_id")
 	private int cvId;
 	
