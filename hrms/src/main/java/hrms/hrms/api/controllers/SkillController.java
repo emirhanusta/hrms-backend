@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import hrms.hrms.businees.abstracts.ExperienceService;
 import hrms.hrms.businees.abstracts.SkillService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
@@ -15,7 +14,7 @@ import hrms.hrms.entities.concretes.Skill;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("api/skill")
+@RequestMapping("/api/skill")
 public class SkillController {
 	
 	private SkillService skillService;

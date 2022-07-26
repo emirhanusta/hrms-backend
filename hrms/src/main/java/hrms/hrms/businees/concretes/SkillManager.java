@@ -15,28 +15,28 @@ import hrms.hrms.entities.concretes.Skill;
 @Service
 public class SkillManager implements SkillService{
 	
-	private SkillDao SkillDao;
+	private SkillDao skillDao;
 	
 	@Autowired
-	public SkillManager(SkillDao SkillDao) {
+	public SkillManager(SkillDao skillDao) {
 		super();
-		this.SkillDao = SkillDao;
+		this.skillDao = skillDao;
 	}
 
 	@Override
-	public Result add(Skill experience) {
-		this.SkillDao.save(experience);
-		return new SuccessDataResult("Education added");
+	public Result add(Skill skill) {
+		this.skillDao.save(skill);
+		return new SuccessDataResult("skill added");
 	}
 
 	@Override
-	public Result delete(Skill experience) {
-		this.SkillDao.delete(experience);
-		return new SuccessDataResult("Experience deleted");
+	public Result delete(Skill skill) {
+		this.skillDao.delete(skill);
+		return new SuccessDataResult("skill deleted");
 	}
 
 	@Override
 	public DataResult<List<Skill>> getAll() {
-		return new SuccessDataResult<List<Skill>>(this.SkillDao.findAll(),"Data listed");
+		return new SuccessDataResult<List<Skill>>(this.skillDao.findAll(),"Data listed");
 	}
 }
