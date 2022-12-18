@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hrms.hrms.businees.abstracts.CityService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.concretes.City;
+import hrms.hrms.model.City;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
@@ -26,7 +26,7 @@ public class CityController {
 		this.cityService = cityService;
 	}
 	
-	@GetMapping("getAll")
+	@GetMapping("/getAll")
 	public DataResult<List<City>> getAll(){
 		return this.cityService.getAll();
 	}

@@ -12,7 +12,7 @@ import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.core.utilities.results.SuccessResult;
 import hrms.hrms.dataAccess.abstracts.JobPostingDao;
-import hrms.hrms.entities.concretes.JobPosting;
+import hrms.hrms.model.JobPosting;
 
 @Service
 public class JobPostingManager implements JobPostingService{
@@ -52,11 +52,11 @@ public class JobPostingManager implements JobPostingService{
         if(getById(id)== null) {
             return new ErrorResult("Job posting not found ");
         }
-        if (getById(id).getData().isActive()==false) {
+        if (!getById(id).getData().getIsActive()) {
             return new SuccessResult("job posting is already closed");
         }
         JobPosting jobPosting=getById(id).getData();
-        jobPosting.setActive(false);
+        jobPosting.setIsActive(false);
         this.jobPostingDao.save(jobPosting);
         return new SuccessResult("job posting closed");
     }

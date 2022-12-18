@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hrms.hrms.businees.abstracts.JobPostingService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.concretes.JobPosting;
+import hrms.hrms.model.JobPosting;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 

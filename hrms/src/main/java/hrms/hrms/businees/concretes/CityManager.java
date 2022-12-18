@@ -11,7 +11,7 @@ import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.core.utilities.results.SuccessResult;
 import hrms.hrms.dataAccess.abstracts.CityDao;
-import hrms.hrms.entities.concretes.City;
+import hrms.hrms.model.City;
 
 @Service
 public class CityManager implements CityService{

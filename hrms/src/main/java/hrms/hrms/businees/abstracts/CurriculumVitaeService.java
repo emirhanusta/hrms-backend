@@ -4,7 +4,7 @@ import java.util.List;
 
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.concretes.CurriculumVitae;
+import hrms.hrms.model.CurriculumVitae;
 
 public interface CurriculumVitaeService {
 	Result add(CurriculumVitae curriculumVitae);

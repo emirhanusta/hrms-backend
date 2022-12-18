@@ -4,7 +4,7 @@ import java.util.List;
 
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.concretes.JobPosting;
+import hrms.hrms.model.JobPosting;
 
 public interface JobPostingService {
 	Result add(JobPosting jobPosting);

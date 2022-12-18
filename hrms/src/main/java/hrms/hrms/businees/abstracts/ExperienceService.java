@@ -4,7 +4,7 @@ import java.util.List;
 
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.concretes.Experience;
+import hrms.hrms.model.Experience;
 
 public interface ExperienceService {
 	Result add(Experience experience);

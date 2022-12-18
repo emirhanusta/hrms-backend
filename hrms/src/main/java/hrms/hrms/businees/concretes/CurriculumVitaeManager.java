@@ -10,7 +10,7 @@ import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.dataAccess.abstracts.CurriculumVitaeDao;
-import hrms.hrms.entities.concretes.CurriculumVitae;
+import hrms.hrms.model.CurriculumVitae;
 
 @Service
 public class CurriculumVitaeManager implements CurriculumVitaeService{

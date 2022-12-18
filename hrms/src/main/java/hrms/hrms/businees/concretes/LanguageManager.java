@@ -10,7 +10,7 @@ import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.dataAccess.abstracts.LanguageDao;
-import hrms.hrms.entities.concretes.Language;
+import hrms.hrms.model.Language;
 
 @Service
 public class LanguageManager implements LanguageService{

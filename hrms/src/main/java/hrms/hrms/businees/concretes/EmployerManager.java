@@ -12,7 +12,7 @@ import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.core.utilities.results.SuccessResult;
 import hrms.hrms.dataAccess.abstracts.EmployerDao;
-import hrms.hrms.entities.concretes.Employer;
+import hrms.hrms.model.Employer;
 
 @Service
 public class EmployerManager implements EmployerService{

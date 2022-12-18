@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hrms.hrms.businees.abstracts.EducationService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.concretes.Education;
+import hrms.hrms.model.Education;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController

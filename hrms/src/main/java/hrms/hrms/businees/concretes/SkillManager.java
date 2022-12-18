@@ -10,7 +10,7 @@ import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.dataAccess.abstracts.SkillDao;
-import hrms.hrms.entities.concretes.Skill;
+import hrms.hrms.model.Skill;
 
 @Service
 public class SkillManager implements SkillService{

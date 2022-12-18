@@ -11,7 +11,7 @@ import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.core.utilities.results.SuccessDataResult;
 import hrms.hrms.core.utilities.results.SuccessResult;
 import hrms.hrms.dataAccess.abstracts.JobPositionDao;
-import hrms.hrms.entities.concretes.JobPosition;
+import hrms.hrms.model.JobPosition;
 
 @Service
 public class JobPositionManager implements JobPositionService{

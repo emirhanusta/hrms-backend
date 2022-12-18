@@ -4,7 +4,7 @@ import java.util.List;
 
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.concretes.JobSeeker;
+import hrms.hrms.model.JobSeeker;
 
 public interface JobSeekerService {
 	DataResult<List<JobSeeker>> getAll();

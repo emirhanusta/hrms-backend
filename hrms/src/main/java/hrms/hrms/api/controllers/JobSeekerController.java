@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hrms.hrms.businees.abstracts.JobSeekerService;
 import hrms.hrms.core.utilities.results.DataResult;
 import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.entities.concretes.JobSeeker;
+import hrms.hrms.model.JobSeeker;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
