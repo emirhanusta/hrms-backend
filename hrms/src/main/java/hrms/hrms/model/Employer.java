@@ -26,4 +26,7 @@ public class Employer extends BaseEntity {
 
 	private Integer phoneNumber;
 
+	@OneToMany
+	private List<JobPosting> jobPosting;
+
 }

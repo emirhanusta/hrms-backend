@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class EmployerCreateRequest  {
-    private Long id;
 
     private String mailAddress;
 

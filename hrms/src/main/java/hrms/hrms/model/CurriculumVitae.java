@@ -1,24 +1,24 @@
 package hrms.hrms.model;
 
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @NoArgsConstructor
 @Entity
 @Builder
 @AllArgsConstructor
+@Setter
 public class CurriculumVitae extends BaseEntity{
 
 	private String coverLetter;
-    
+
+    @OneToOne
+    @JoinColumn(name = "candidate_id")
+    private Candidate candidate;
+
     @OneToMany(mappedBy = "curriculumVitae")
     private List<Experience> experience;
     
@@ -33,4 +33,5 @@ public class CurriculumVitae extends BaseEntity{
     
     @OneToMany(mappedBy = "curriculumVitae")
     private List<Skill> skill;
+
 }

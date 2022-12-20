@@ -1,17 +1,17 @@
 package hrms.hrms.model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @NoArgsConstructor
 @Entity
 @Builder
 @AllArgsConstructor
-public class JobSeeker extends BaseEntity {
+@Setter
+public class Candidate extends BaseEntity {
 
 	private String firstName;
 
@@ -25,5 +25,7 @@ public class JobSeeker extends BaseEntity {
 
 	private Integer phoneNumber;
 
+	@OneToOne(mappedBy = "candidate")
+	private CurriculumVitae curriculumVitae;
 
 }

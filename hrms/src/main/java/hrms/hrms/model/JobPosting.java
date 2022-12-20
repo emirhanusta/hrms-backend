@@ -32,14 +32,12 @@ public class JobPosting extends BaseEntity{
 	private Double minSalary;
 	
 	private Boolean isActive;
-	
+
+	private City city;
+
 	@ManyToOne()
 	@JoinColumn(name = "employer_id")
 	private Employer employer;
-	
-    @ManyToOne()
-    @JoinColumn(name = "city_id")
-	private City city;
     
 	@ManyToOne()
 	@JoinColumn(name = "job_position_id")
