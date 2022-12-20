@@ -7,16 +7,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Skill {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+@Builder
+@AllArgsConstructor
+public class Skill extends BaseEntity{
 	
 	private String name;
 	

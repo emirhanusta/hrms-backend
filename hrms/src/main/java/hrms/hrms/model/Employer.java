@@ -2,20 +2,28 @@ package hrms.hrms.model;
 
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Employer extends User{
-	
+@Builder
+@AllArgsConstructor
+@Setter
+public class Employer extends BaseEntity {
+
 	private String companyName;
-	
-	private String webSite;
-	
-	private Integer telNo;
-	
-	private List<JobPosting> jobPostings;
+
+	private String website;
+
+	private String mailAddress;
+
+	private String password;
+
+	private Integer phoneNumber;
+
 }

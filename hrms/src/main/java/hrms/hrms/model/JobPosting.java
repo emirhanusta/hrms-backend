@@ -12,18 +12,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class JobPosting {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
-	private Long id;
-	
+@Builder
+@AllArgsConstructor
+public class JobPosting extends BaseEntity{
+
 	private String description;
 	
 	private Integer openPositions;

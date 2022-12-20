@@ -8,18 +8,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Language {
+@Builder
+@AllArgsConstructor
+public class Language extends BaseEntity{
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
 	private String name;
 	
 	private Level level;

@@ -13,19 +13,15 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class JobPosition {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
-	private Long id;
-	
+@Builder
+@AllArgsConstructor
+public class JobPosition extends BaseEntity{
+
 	private String jobTitle;
 
 	@OneToMany(mappedBy = "jobPosition")

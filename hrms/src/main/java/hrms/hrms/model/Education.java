@@ -12,18 +12,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Education {
+@Builder
+@AllArgsConstructor
+public class Education extends BaseEntity{
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
 	private String schoolName;
 	
 	private String departmentName;

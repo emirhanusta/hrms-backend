@@ -8,18 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class CurriculumVitae {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
-	private Long id;
-	
+@Builder
+@AllArgsConstructor
+public class CurriculumVitae extends BaseEntity{
+
 	private String coverLetter;
     
     @OneToMany(mappedBy = "curriculumVitae")

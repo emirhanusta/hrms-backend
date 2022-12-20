@@ -7,18 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class City {
+@Builder
+@AllArgsConstructor
+public class City extends BaseEntity{
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long cityId;
-	
 	private String cityName;
 	
 	@OneToMany(mappedBy = "city")

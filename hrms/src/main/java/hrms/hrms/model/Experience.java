@@ -12,12 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@Builder
+@AllArgsConstructor
 public class Experience {
 	
 	@Id
