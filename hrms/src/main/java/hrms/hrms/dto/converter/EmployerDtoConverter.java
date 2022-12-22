@@ -1,5 +1,6 @@
-package hrms.hrms.dto;
+package hrms.hrms.dto.converter;
 
+import hrms.hrms.dto.response.EmployerDto;
 import hrms.hrms.model.Employer;
 import org.springframework.stereotype.Component;
 

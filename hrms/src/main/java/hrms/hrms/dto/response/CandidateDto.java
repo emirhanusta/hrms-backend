@@ -1,14 +1,16 @@
-package hrms.hrms.dto;
+package hrms.hrms.dto.response;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class CreateCandidateRequest {
+@NoArgsConstructor
+public class CandidateDto {
 
+    private Long id;
     private String firstName;
     private String lastName;
     private String MailAddress;
     private String password;
     private Integer phoneNumber;
-
 }

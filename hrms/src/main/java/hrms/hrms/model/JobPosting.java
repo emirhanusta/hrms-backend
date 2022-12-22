@@ -2,14 +2,7 @@ package hrms.hrms.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -35,7 +28,7 @@ public class JobPosting extends BaseEntity{
 
 	private City city;
 
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employer_id")
 	private Employer employer;
     

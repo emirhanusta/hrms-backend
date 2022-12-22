@@ -1,9 +1,10 @@
 package hrms.hrms.service;
 
-import hrms.hrms.dto.CandidateConverterDto;
-import hrms.hrms.dto.CreateCandidateRequest;
-import hrms.hrms.dto.CandidateDto;
-import hrms.hrms.dto.UpdateCandidateRequest;
+import hrms.hrms.dto.converter.CandidateDtoConverter;
+import hrms.hrms.dto.request.CreateCandidateRequest;
+import hrms.hrms.dto.response.CandidateDto;
+import hrms.hrms.dto.request.UpdateCandidateRequest;
+import hrms.hrms.model.CV;
 import hrms.hrms.model.Candidate;
 import hrms.hrms.repository.CandidateRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 public class CandidateService {
 
     private final CandidateRepository candidateRepository;
-    private final CandidateConverterDto candidateConverterDto;
+    private final CandidateDtoConverter candidateDtoConverter;
 
     public CandidateDto createCandidate(CreateCandidateRequest request) {
         Candidate candidate = Candidate.builder()
@@ -26,20 +27,24 @@ public class CandidateService {
                 .mailAddress(request.getMailAddress())
                 .password(request.getPassword())
                 .phoneNumber(request.getPhoneNumber())
+                .dateOfBirth(request.getDateOfBirth())
                 .build();
         candidateRepository.save(candidate);
-        return candidateConverterDto.convertToDto(candidate);
+        return candidateDtoConverter.convertToDto(candidate);
     }
 
     public List<CandidateDto> getAllCandidates() {
-        return candidateRepository.findAll().stream().map(candidateConverterDto::convertToDto).collect(Collectors.toList());
+        return candidateRepository.findAll().stream().map(candidateDtoConverter::convertToDto).collect(Collectors.toList());
     }
 
-    public CandidateDto getById(Long id) {
-        return candidateRepository.findById(id).map(candidateConverterDto::convertToDto).orElseThrow();
+    public CandidateDto getCandidateById(Long id) {
+        return candidateRepository.findById(id).map(candidateDtoConverter::convertToDto).orElseThrow();
+    }
+    protected Candidate getCandidate(Long id) {
+        return candidateRepository.findById(id).orElseThrow();
     }
 
-    public CandidateDto updateCandidate(Long id, UpdateCandidateRequest request) {
+    public CandidateDto updateCandidateById(Long id, UpdateCandidateRequest request) {
         Candidate candidate = candidateRepository.findById(id).orElseThrow();
         candidate.setFirstName(request.getFirstName());
         candidate.setLastName(request.getLastName());
@@ -47,10 +52,16 @@ public class CandidateService {
         candidate.setPassword(request.getPassword());
         candidate.setPhoneNumber(request.getPhoneNumber());
         candidateRepository.save(candidate);
-        return candidateConverterDto.convertToDto(candidate);
+        return candidateDtoConverter.convertToDto(candidate);
     }
 
-    public void deleteCandidate(Long id) {
+    protected Long updateCandidateCV(Long id, CV cv) {
+        Candidate candidate = candidateRepository.findById(id).orElseThrow();
+        candidate.setCv(cv);
+        candidateRepository.save(candidate);
+        return id;
+    }
+    public void deleteCandidateById(Long id) {
         candidateRepository.deleteById(id);
     }
 }

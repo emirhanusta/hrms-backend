@@ -1,9 +1,9 @@
-package hrms.hrms.dto;
+package hrms.hrms.dto.request;
 
 import lombok.Data;
 
 @Data
-public class EmployerUpdateRequest {
+public class UpdateEmployerRequest {
     private String mailAddress;
     private String password;
     private Integer phoneNumber;

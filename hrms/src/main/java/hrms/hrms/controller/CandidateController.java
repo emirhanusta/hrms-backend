@@ -1,8 +1,8 @@
 package hrms.hrms.controller;
 
-import hrms.hrms.dto.CandidateDto;
-import hrms.hrms.dto.CreateCandidateRequest;
-import hrms.hrms.dto.UpdateCandidateRequest;
+import hrms.hrms.dto.response.CandidateDto;
+import hrms.hrms.dto.request.CreateCandidateRequest;
+import hrms.hrms.dto.request.UpdateCandidateRequest;
 import hrms.hrms.service.CandidateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ public class CandidateController {
 
     @GetMapping("/{id}")
     ResponseEntity<CandidateDto> getCandidateById(@PathVariable Long id) {
-        return ResponseEntity.ok(candidateService.getById(id));
+        return ResponseEntity.ok(candidateService.getCandidateById(id));
     }
 
     @PostMapping
@@ -36,12 +36,12 @@ public class CandidateController {
 
     @PutMapping("/{id}")
     ResponseEntity<CandidateDto> updateCandidate(@PathVariable Long id, @Valid @RequestBody UpdateCandidateRequest request) {
-        return ResponseEntity.ok(candidateService.updateCandidate(id, request));
+        return ResponseEntity.ok(candidateService.updateCandidateById(id, request));
     }
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteCandidate(@PathVariable Long id) {
-        candidateService.deleteCandidate(id);
+        candidateService.deleteCandidateById(id);
         return ResponseEntity.ok().build();
     }
 }

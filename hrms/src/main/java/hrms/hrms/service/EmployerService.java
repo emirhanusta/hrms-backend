@@ -1,9 +1,9 @@
 package hrms.hrms.service;
 
-import hrms.hrms.dto.EmployerCreateRequest;
-import hrms.hrms.dto.EmployerDto;
-import hrms.hrms.dto.EmployerDtoConverter;
-import hrms.hrms.dto.EmployerUpdateRequest;
+import hrms.hrms.dto.request.CreateEmployerRequest;
+import hrms.hrms.dto.response.EmployerDto;
+import hrms.hrms.dto.converter.EmployerDtoConverter;
+import hrms.hrms.dto.request.UpdateEmployerRequest;
 import hrms.hrms.model.Employer;
 import hrms.hrms.repository.EmployerRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,13 +29,13 @@ public class EmployerService {
         return employerDtoConverter.convertToDto(employer);
     }
 
-    public EmployerDto createEmployer(EmployerCreateRequest employerCreateRequest) {
+    public EmployerDto createEmployer(CreateEmployerRequest createEmployerRequest) {
         Employer employer = Employer.builder()
-                .companyName(employerCreateRequest.getCompanyName())
-                .mailAddress(employerCreateRequest.getMailAddress())
-                .password(employerCreateRequest.getPassword())
-                .phoneNumber(employerCreateRequest.getPhoneNumber())
-                .website(employerCreateRequest.getWebsite())
+                .companyName(createEmployerRequest.getCompanyName())
+                .mailAddress(createEmployerRequest.getMailAddress())
+                .password(createEmployerRequest.getPassword())
+                .phoneNumber(createEmployerRequest.getPhoneNumber())
+                .website(createEmployerRequest.getWebsite())
                 .build();
         employerRepository.save(employer);
         return employerDtoConverter.convertToDto(employer);
@@ -43,14 +43,14 @@ public class EmployerService {
 
 
 
-    public EmployerDto updateEmployer(Long id, EmployerUpdateRequest employerUpdateRequest) {
+    public EmployerDto updateEmployer(Long id, UpdateEmployerRequest updateEmployerRequest) {
         Optional<Employer> employer = employerRepository.findById(id);
         if (employer.isPresent()) {
-            employer.get().setCompanyName(employerUpdateRequest.getCompanyName());
-            employer.get().setMailAddress(employerUpdateRequest.getMailAddress());
-            employer.get().setPassword(employerUpdateRequest.getPassword());
-            employer.get().setPhoneNumber(employerUpdateRequest.getPhoneNumber());
-            employer.get().setWebsite(employerUpdateRequest.getWebsite());
+            employer.get().setCompanyName(updateEmployerRequest.getCompanyName());
+            employer.get().setMailAddress(updateEmployerRequest.getMailAddress());
+            employer.get().setPassword(updateEmployerRequest.getPassword());
+            employer.get().setPhoneNumber(updateEmployerRequest.getPhoneNumber());
+            employer.get().setWebsite(updateEmployerRequest.getWebsite());
             employerRepository.save(employer.get());
             return employer.map(employerDtoConverter::convertToDto).orElseThrow();
         }

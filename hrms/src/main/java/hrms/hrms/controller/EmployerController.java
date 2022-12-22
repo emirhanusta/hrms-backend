@@ -1,8 +1,8 @@
 package hrms.hrms.controller;
 
-import hrms.hrms.dto.EmployerCreateRequest;
-import hrms.hrms.dto.EmployerDto;
-import hrms.hrms.dto.EmployerUpdateRequest;
+import hrms.hrms.dto.request.CreateEmployerRequest;
+import hrms.hrms.dto.response.EmployerDto;
+import hrms.hrms.dto.request.UpdateEmployerRequest;
 import hrms.hrms.service.EmployerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,8 +20,8 @@ public class EmployerController {
     private final EmployerService employerService;
 
     @PostMapping
-    ResponseEntity<EmployerDto> createEmployer(@Valid @RequestBody EmployerCreateRequest employerCreateRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(employerService.createEmployer(employerCreateRequest));
+    ResponseEntity<EmployerDto> createEmployer(@Valid @RequestBody CreateEmployerRequest createEmployerRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(employerService.createEmployer(createEmployerRequest));
     }
     @GetMapping("/{id}")
     ResponseEntity<EmployerDto> getEmployer(@PathVariable Long id) {
@@ -34,8 +34,8 @@ public class EmployerController {
     }
     @PutMapping("/{id}")
     ResponseEntity<EmployerDto> updateEmployer(@PathVariable Long id,
-                                               @Valid @RequestBody EmployerUpdateRequest employerUpdateRequest) {
-        return ResponseEntity.ok(employerService.updateEmployer(id, employerUpdateRequest));
+                                               @Valid @RequestBody UpdateEmployerRequest updateEmployerRequest) {
+        return ResponseEntity.ok(employerService.updateEmployer(id, updateEmployerRequest));
     }
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteEmployer(@PathVariable Long id) {

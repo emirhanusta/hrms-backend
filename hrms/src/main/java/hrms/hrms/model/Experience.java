@@ -1,41 +1,31 @@
 package hrms.hrms.model;
 
-import java.time.LocalDate;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @NoArgsConstructor
 @Entity
 @Builder
 @AllArgsConstructor
-public class Experience {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
-	private Long id;
-	
-	private int workPlace;
-	 
-	private int position;
-	
-	private LocalDate startingDate;
-	
-	private LocalDate quitDate;
-	
-	@ManyToOne
-	@JoinColumn(name="curriculum_vitae_id")
-	private CurriculumVitae curriculumVitae;
-	
+public class Experience extends BaseEntity{
+
+	private String companyName;
+
+	private String position;
+
+	private String startDate;
+
+	private String endDate;
+
+	private String description;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="cv_id")
+	@JsonIgnore
+	private CV cv;
+
+
 }

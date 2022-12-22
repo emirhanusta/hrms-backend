@@ -1,9 +1,9 @@
-package hrms.hrms.dto;
+package hrms.hrms.dto.request;
 
 import lombok.Data;
 
 @Data
-public class EmployerCreateRequest  {
+public class CreateEmployerRequest {
 
     private String mailAddress;
 

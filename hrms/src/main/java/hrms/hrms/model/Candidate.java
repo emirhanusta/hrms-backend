@@ -1,6 +1,7 @@
 package hrms.hrms.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import lombok.*;
@@ -25,7 +26,9 @@ public class Candidate extends BaseEntity {
 
 	private Integer phoneNumber;
 
-	@OneToOne(mappedBy = "candidate")
-	private CurriculumVitae curriculumVitae;
+
+	@OneToOne
+	@JoinColumn(name = "cv_id")
+	private CV cv;
 
 }
