@@ -1,8 +1,6 @@
 package hrms.hrms.model;
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 @Getter
@@ -10,6 +8,7 @@ import lombok.*;
 @Entity
 @Builder
 @AllArgsConstructor
+@Setter
 public class Experience extends BaseEntity{
 
 	private String companyName;
@@ -21,11 +20,6 @@ public class Experience extends BaseEntity{
 	private String endDate;
 
 	private String description;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="cv_id")
-	@JsonIgnore
-	private CV cv;
 
 
 }

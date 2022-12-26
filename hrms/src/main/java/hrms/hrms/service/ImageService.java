@@ -1,7 +1,7 @@
 package hrms.hrms.service;
 
 import hrms.hrms.dto.request.CreateImageRequest;
-import hrms.hrms.model.CV;
+import hrms.hrms.dto.request.UpdateImageRequest;
 import hrms.hrms.model.Image;
 import hrms.hrms.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,12 +13,17 @@ import org.springframework.stereotype.Service;
 public class ImageService {
 
     private final ImageRepository imageRepository;
-    private final CVService cvService;
-    public Image createImage(CreateImageRequest request, CV cv) {
+
+    protected Image createImage(CreateImageRequest request) {
         Image image = Image.builder()
                 .url(request.getUrl())
-                .cv(cv)
                 .build();
+        return imageRepository.save(image);
+    }
+
+    protected Image updateImage(UpdateImageRequest request) {
+        Image image = imageRepository.findById(request.getId()).orElseThrow();
+        image.setUrl(request.getUrl());
         return imageRepository.save(image);
     }
 }

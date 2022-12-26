@@ -1,7 +1,7 @@
 package hrms.hrms.service;
 
 import hrms.hrms.dto.request.CreateSkillRequest;
-import hrms.hrms.model.CV;
+import hrms.hrms.dto.request.UpdateSkillRequest;
 import hrms.hrms.model.Skill;
 import hrms.hrms.repository.SkillRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,15 +15,24 @@ import java.util.List;
 public class SkillService {
 
     private final SkillRepository skillRepository;
-    private final CVService cvService;
-    protected List<Skill> createSkill(List<CreateSkillRequest> requests, CV cv) {
+
+    protected List<Skill> createSkill(List<CreateSkillRequest> requests) {
         for (CreateSkillRequest skill : requests) {
              Skill skillToSave = Skill.builder()
                     .name(skill.getName())
                     .level(skill.getLevel())
-                     .cv(cv)
                     .build();
             skillRepository.save(skillToSave);
+        } return skillRepository.findAll();
+    }
+
+    protected List<Skill> updateSkill(List<UpdateSkillRequest> skills) {
+
+        for (UpdateSkillRequest skill : skills) {
+            Skill skillToUpdate = skillRepository.findById(skill.getId()).orElseThrow();
+            skillToUpdate.setName(skill.getName());
+            skillToUpdate.setLevel(skill.getLevel());
+            skillRepository.save(skillToUpdate);
         } return skillRepository.findAll();
     }
 }

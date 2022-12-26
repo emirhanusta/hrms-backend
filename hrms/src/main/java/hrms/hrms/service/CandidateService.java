@@ -40,9 +40,6 @@ public class CandidateService {
     public CandidateDto getCandidateById(Long id) {
         return candidateRepository.findById(id).map(candidateDtoConverter::convertToDto).orElseThrow();
     }
-    protected Candidate getCandidate(Long id) {
-        return candidateRepository.findById(id).orElseThrow();
-    }
 
     public CandidateDto updateCandidateById(Long id, UpdateCandidateRequest request) {
         Candidate candidate = candidateRepository.findById(id).orElseThrow();
@@ -55,11 +52,10 @@ public class CandidateService {
         return candidateDtoConverter.convertToDto(candidate);
     }
 
-    protected Long updateCandidateCV(Long id, CV cv) {
+    protected void updateCandidateCV(Long id, CV cv) {
         Candidate candidate = candidateRepository.findById(id).orElseThrow();
         candidate.setCv(cv);
         candidateRepository.save(candidate);
-        return id;
     }
     public void deleteCandidateById(Long id) {
         candidateRepository.deleteById(id);

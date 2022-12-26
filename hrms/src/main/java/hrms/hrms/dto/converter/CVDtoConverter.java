@@ -11,12 +11,11 @@ public class CVDtoConverter {
         CVDto CVDto = new CVDto();
         CVDto.setId(CV.getId());
         CVDto.setCoverLetter(CV.getCoverLetter());
-        CVDto.setCandidateId(CV.getCandidate().getId());
-        CVDto.setExperience(CV.getExperience());
-        CVDto.setEducation(CV.getEducation());
-        CVDto.setLanguage(CV.getLanguage());
+        CVDto.setExperience(CV.getExperiences());
+        CVDto.setEducation(CV.getEducations());
+        CVDto.setLanguage(CV.getLanguages());
         CVDto.setImage(CV.getImage());
-        CVDto.setSkill(CV.getSkill());
+        CVDto.setSkill(CV.getSkills());
         return CVDto;
     }
 }

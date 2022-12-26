@@ -1,9 +1,9 @@
 package hrms.hrms.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
 import lombok.*;
 
 @Getter
@@ -26,8 +26,7 @@ public class Candidate extends BaseEntity {
 
 	private Integer phoneNumber;
 
-
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cv_id")
 	private CV cv;
 

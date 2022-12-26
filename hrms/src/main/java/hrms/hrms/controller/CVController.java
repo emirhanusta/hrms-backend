@@ -1,8 +1,8 @@
 package hrms.hrms.controller;
 
 import hrms.hrms.dto.request.CreateCVRequest;
+import hrms.hrms.dto.request.UpdateCVRequest;
 import hrms.hrms.dto.response.CVDto;
-import hrms.hrms.model.CV;
 import hrms.hrms.service.CVService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +22,11 @@ public class CVController {
     @PostMapping
     public ResponseEntity<CVDto> createCV(@Valid @RequestBody CreateCVRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(cvService.createCV(request));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CVDto> updateCV(@PathVariable Long id, @Valid @RequestBody UpdateCVRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).body(cvService.updateCV(id, request));
     }
     @GetMapping
     public ResponseEntity<List<CVDto>> getAllCVs(){

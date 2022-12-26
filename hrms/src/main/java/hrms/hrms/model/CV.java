@@ -2,11 +2,8 @@ package hrms.hrms.model;
 
 import java.util.List;
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @NoArgsConstructor
@@ -18,34 +15,26 @@ public class CV extends BaseEntity{
 
 	private String coverLetter;
 
-    @OneToOne
-    @JoinColumn(name = "candidate_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Candidate candidate;
 
-    @OneToMany(mappedBy = "cv",fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Experience> experience;
+    private List<Experience> experiences;
 
-    @OneToMany(mappedBy = "cv",fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Education> education;
+    private List<Education> educations;
 
-    @OneToMany(mappedBy = "cv",fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Language> language;
+    private List<Language> languages;
 
-    @OneToOne(mappedBy = "cv")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "image_id")
     @JsonIgnore
     private Image image;
 
-    @OneToMany(mappedBy = "cv",fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Skill> skill;
+    private List<Skill> skills;
 
 }

@@ -12,8 +12,6 @@ public class CVDto {
 
     private String coverLetter;
 
-    private Long candidateId;
-
     private List<Experience> experience;
 
     private List<Education> education;

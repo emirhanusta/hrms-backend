@@ -2,8 +2,6 @@ package hrms.hrms.model;
 
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 @Getter
@@ -11,6 +9,7 @@ import lombok.*;
 @Entity
 @Builder
 @AllArgsConstructor
+@Setter
 public class Education extends BaseEntity{
 
 	private String schoolName;
@@ -21,9 +20,4 @@ public class Education extends BaseEntity{
 
 	private String endDate;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="cv_id")
-	@JsonIgnore
-	private CV cv;
-	
 }

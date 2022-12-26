@@ -1,7 +1,7 @@
 package hrms.hrms.service;
 
 import hrms.hrms.dto.request.CreateLanguageRequest;
-import hrms.hrms.model.CV;
+import hrms.hrms.dto.request.UpdateLanguageRequest;
 import hrms.hrms.model.Language;
 import hrms.hrms.repository.LanguageRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,15 +15,24 @@ import java.util.List;
 public class LanguageService {
 
     private final LanguageRepository languageRepository;
-    private final CVService cvService;
-    protected List<Language> createLanguage(List<CreateLanguageRequest> languages, CV cv) {
+
+    protected List<Language> createLanguage(List<CreateLanguageRequest> languages) {
 
         for (CreateLanguageRequest languageDto : languages) {
             Language language = Language.builder()
                     .name(languageDto.getName())
                     .level(languageDto.getLevel())
-                    .cv(cv)
                     .build();
+            languageRepository.save(language);
+        }
+        return languageRepository.findAll();
+    }
+
+    protected List<Language> updateLanguage(List<UpdateLanguageRequest> languages) {
+        for (UpdateLanguageRequest languageDto : languages) {
+            Language language = languageRepository.findById(languageDto.getId()).orElseThrow();
+            language.setName(languageDto.getName());
+            language.setLevel(languageDto.getLevel());
             languageRepository.save(language);
         }
         return languageRepository.findAll();
