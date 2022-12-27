@@ -24,8 +24,8 @@ public class EmployerController {
         return ResponseEntity.status(HttpStatus.CREATED).body(employerService.createEmployer(createEmployerRequest));
     }
     @GetMapping("/{id}")
-    ResponseEntity<EmployerDto> getEmployer(@PathVariable Long id) {
-        return ResponseEntity.ok(employerService.getEmployer(id));
+    ResponseEntity<EmployerDto> getEmployerById(@PathVariable Long id) {
+        return ResponseEntity.ok(employerService.getEmployerById(id));
     }
 
     @GetMapping

@@ -5,12 +5,11 @@ import hrms.hrms.dto.response.EmployerDto;
 import hrms.hrms.dto.converter.EmployerDtoConverter;
 import hrms.hrms.dto.request.UpdateEmployerRequest;
 import hrms.hrms.model.Employer;
+import hrms.hrms.model.Job;
 import hrms.hrms.repository.EmployerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +23,7 @@ public class EmployerService {
         return employers.stream().map(employerDtoConverter::convertToDto).collect(Collectors.toList());
     }
 
-    public EmployerDto getEmployer(Long id) {
+    public EmployerDto getEmployerById(Long id) {
         Employer employer = employerRepository.findById(id).orElseThrow();
         return employerDtoConverter.convertToDto(employer);
     }
@@ -41,23 +40,24 @@ public class EmployerService {
         return employerDtoConverter.convertToDto(employer);
     }
 
-
-
     public EmployerDto updateEmployer(Long id, UpdateEmployerRequest updateEmployerRequest) {
-        Optional<Employer> employer = employerRepository.findById(id);
-        if (employer.isPresent()) {
-            employer.get().setCompanyName(updateEmployerRequest.getCompanyName());
-            employer.get().setMailAddress(updateEmployerRequest.getMailAddress());
-            employer.get().setPassword(updateEmployerRequest.getPassword());
-            employer.get().setPhoneNumber(updateEmployerRequest.getPhoneNumber());
-            employer.get().setWebsite(updateEmployerRequest.getWebsite());
-            employerRepository.save(employer.get());
-            return employer.map(employerDtoConverter::convertToDto).orElseThrow();
-        }
-        return null;
+        Employer employer = employerRepository.findById(id).orElseThrow();
+        employer.setCompanyName(updateEmployerRequest.getCompanyName());
+        employer.setMailAddress(updateEmployerRequest.getMailAddress());
+        employer.setPassword(updateEmployerRequest.getPassword());
+        employer.setPhoneNumber(updateEmployerRequest.getPhoneNumber());
+        employer.setWebsite(updateEmployerRequest.getWebsite());
+        employerRepository.save(employer);
+        return employerDtoConverter.convertToDto(employer);
     }
 
     public void deleteEmployer(Long id) {
         employerRepository.deleteById(id);
+    }
+
+    protected void addJob(Long id,Job job) {
+        Employer employer = employerRepository.findById(id).orElseThrow();
+        employer.getJobs().add(job);
+        employerRepository.save(employer);
     }
 }

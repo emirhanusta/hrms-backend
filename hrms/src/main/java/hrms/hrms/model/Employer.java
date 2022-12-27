@@ -1,12 +1,9 @@
 package hrms.hrms.model;
 
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
+import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @NoArgsConstructor
@@ -26,7 +23,8 @@ public class Employer extends BaseEntity {
 
 	private Integer phoneNumber;
 
-	@OneToMany
-	private List<JobPosting> jobPosting;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Job> jobs;
 
 }

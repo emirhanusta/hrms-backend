@@ -5,13 +5,12 @@ import hrms.hrms.dto.request.UpdateEducationRequest;
 import hrms.hrms.model.Education;
 import hrms.hrms.repository.EducationRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Lazy))
+@RequiredArgsConstructor
 public class EducationService {
 
     private final EducationRepository educationRepository;

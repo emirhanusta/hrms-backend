@@ -29,7 +29,6 @@ public class CV extends BaseEntity{
     private List<Language> languages;
 
     @OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "image_id")
     @JsonIgnore
     private Image image;
 
