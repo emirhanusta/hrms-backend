@@ -5,13 +5,12 @@ import hrms.hrms.dto.request.UpdateSkillRequest;
 import hrms.hrms.model.Skill;
 import hrms.hrms.repository.SkillRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Lazy))
+@RequiredArgsConstructor
 public class SkillService {
 
     private final SkillRepository skillRepository;

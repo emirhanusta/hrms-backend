@@ -5,11 +5,10 @@ import hrms.hrms.dto.request.UpdateImageRequest;
 import hrms.hrms.model.Image;
 import hrms.hrms.repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Lazy))
+@RequiredArgsConstructor
 public class ImageService {
 
     private final ImageRepository imageRepository;

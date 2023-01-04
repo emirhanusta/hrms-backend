@@ -5,13 +5,12 @@ import hrms.hrms.dto.request.UpdateLanguageRequest;
 import hrms.hrms.model.Language;
 import hrms.hrms.repository.LanguageRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Lazy))
+@RequiredArgsConstructor
 public class LanguageService {
 
     private final LanguageRepository languageRepository;
