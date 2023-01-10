@@ -4,12 +4,15 @@ import hrms.hrms.dto.request.CreateEmployerRequest;
 import hrms.hrms.dto.response.EmployerDto;
 import hrms.hrms.dto.converter.EmployerDtoConverter;
 import hrms.hrms.dto.request.UpdateEmployerRequest;
+import hrms.hrms.exception.EmployerNotFoundException;
 import hrms.hrms.model.Employer;
 import hrms.hrms.model.Job;
 import hrms.hrms.repository.EmployerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +27,7 @@ public class EmployerService {
     }
 
     public EmployerDto getEmployerById(Long id) {
-        Employer employer = employerRepository.findById(id).orElseThrow();
+        Employer employer = employerRepository.findById(id).orElseThrow(() -> new EmployerNotFoundException("Could not find employer with id: " + id));
         return employerDtoConverter.convertToDto(employer);
     }
 
@@ -41,14 +44,18 @@ public class EmployerService {
     }
 
     public EmployerDto updateEmployer(Long id, UpdateEmployerRequest updateEmployerRequest) {
-        Employer employer = employerRepository.findById(id).orElseThrow();
-        employer.setCompanyName(updateEmployerRequest.getCompanyName());
-        employer.setMailAddress(updateEmployerRequest.getMailAddress());
-        employer.setPassword(updateEmployerRequest.getPassword());
-        employer.setPhoneNumber(updateEmployerRequest.getPhoneNumber());
-        employer.setWebsite(updateEmployerRequest.getWebsite());
-        employerRepository.save(employer);
-        return employerDtoConverter.convertToDto(employer);
+        Optional<Employer> employer = employerRepository.findById(id);
+        if (employer.isPresent()) {
+            employer.get().setCompanyName(updateEmployerRequest.getCompanyName());
+            employer.get().setMailAddress(updateEmployerRequest.getMailAddress());
+            employer.get().setPassword(updateEmployerRequest.getPassword());
+            employer.get().setPhoneNumber(updateEmployerRequest.getPhoneNumber());
+            employer.get().setWebsite(updateEmployerRequest.getWebsite());
+            employerRepository.save(employer.get());
+            return employerDtoConverter.convertToDto(employer.get());
+        } else {
+            throw new EmployerNotFoundException("Could not find employer with id: " + id);
+        }
     }
 
     public void deleteEmployer(Long id) {
@@ -56,7 +63,7 @@ public class EmployerService {
     }
 
     protected void addJob(Long id,Job job) {
-        Employer employer = employerRepository.findById(id).orElseThrow();
+        Employer employer = employerRepository.findById(id).orElseThrow(() -> new EmployerNotFoundException("Could not find employer with id: " + id));
         employer.getJobs().add(job);
         employerRepository.save(employer);
     }

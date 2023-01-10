@@ -4,12 +4,14 @@ import hrms.hrms.dto.converter.JobConverterDto;
 import hrms.hrms.dto.request.CreateJobRequest;
 import hrms.hrms.dto.request.UpdateJobRequest;
 import hrms.hrms.dto.response.JobDto;
+import hrms.hrms.exception.JobNotFoundException;
 import hrms.hrms.model.Job;
 import hrms.hrms.repository.JobRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +30,7 @@ public class JobService {
 
 
     public JobDto getJobById(Long id) {
-        Job job = jobRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Job not found"));
+        Job job = jobRepository.findById(id).orElseThrow(() -> new JobNotFoundException("Could not find job with id: " + id));
         return jobConverterDto.convertToDto(job);
     }
 
@@ -56,17 +58,22 @@ public class JobService {
     }
 
     public JobDto updateJob(Long id, UpdateJobRequest updateJobRequest) {
-        Job job = jobRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Job not found"));
-        job.setDescription(updateJobRequest.getDescription());
-        job.setMinSalary(updateJobRequest.getMinSalary());
-        job.setMaxSalary(updateJobRequest.getMaxSalary());
-        job.setDeadline(updateJobRequest.getDeadline());
-        job.setIsActive(updateJobRequest.getIsActive());
-        job.setCity(updateJobRequest.getCity());
-        job.setJobType(updateJobRequest.getJobType());
-        job.setWorkplaceType(updateJobRequest.getWorkplaceType());
-
-        return jobConverterDto.convertToDto(jobRepository.save(job));
+        Optional<Job> job = jobRepository.findById(id);
+        if (job.isPresent()) {
+            job.get().setDescription(updateJobRequest.getDescription());
+            job.get().setMinSalary(updateJobRequest.getMinSalary());
+            job.get().setMaxSalary(updateJobRequest.getMaxSalary());
+            job.get().setDeadline(updateJobRequest.getDeadline());
+            job.get().setIsActive(updateJobRequest.getIsActive());
+            job.get().setCity(updateJobRequest.getCity());
+            job.get().setJobType(updateJobRequest.getJobType());
+            job.get().setWorkplaceType(updateJobRequest.getWorkplaceType());
+            job.get().setJobPosition(jobPositionService.getJobPosition(updateJobRequest.getJobPositionId()));
+            jobRepository.save(job.get());
+            return jobConverterDto.convertToDto(job.get());
+        } else {
+            throw new JobNotFoundException("Could not find job with id: " + id);
+        }
     }
 
     public void deleteJob(Long id) {

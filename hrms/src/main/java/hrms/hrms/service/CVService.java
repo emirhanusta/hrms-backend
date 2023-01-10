@@ -4,12 +4,13 @@ import hrms.hrms.dto.request.CreateCVRequest;
 import hrms.hrms.dto.converter.CVDtoConverter;
 import hrms.hrms.dto.request.UpdateCVRequest;
 import hrms.hrms.dto.response.CVDto;
+import hrms.hrms.exception.CvNotFoundException;
 import hrms.hrms.model.CV;
 import hrms.hrms.repository.CVRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,15 +41,19 @@ public class CVService {
     }
 
     public CVDto updateCV(Long id, UpdateCVRequest request) {
-        CV cv = cvRepository.findById(id).orElseThrow();
-        cv.setCoverLetter(request.getCoverLetter());
-        cv.setExperiences(experienceService.updateExperience(request.getExperience()));
-        cv.setEducations(educationService.updateEducation(request.getEducation()));
-        cv.setLanguages(languageService.updateLanguage(request.getLanguage()));
-        cv.setSkills(skillService.updateSkill(request.getSkill()));
-        cv.setImage(imageService.updateImage(request.getImage()));
-        cvRepository.save(cv);
-        return cvDtoConverter.convertToDto(cv);
+        Optional<CV> cv = cvRepository.findById(id);
+        if (cv.isPresent()) {
+            cv.get().setCoverLetter(request.getCoverLetter());
+            cv.get().setExperiences(experienceService.updateExperience(request.getExperience()));
+            cv.get().setEducations(educationService.updateEducation(request.getEducation()));
+            cv.get().setLanguages(languageService.updateLanguage(request.getLanguage()));
+            cv.get().setSkills(skillService.updateSkill(request.getSkill()));
+            cv.get().setImage(imageService.updateImage(request.getImage()));
+            cvRepository.save(cv.get());
+            return cvDtoConverter.convertToDto(cv.get());
+        } else {
+            throw new CvNotFoundException("Could not find cv with id: " + id);
+        }
     }
     public List<CVDto> getAllCVs() {
         List<CV> cvList = cvRepository.findAll();
@@ -57,7 +62,7 @@ public class CVService {
     }
 
     public CVDto getCVById(Long id){
-        return cvRepository.findById(id).map(cvDtoConverter::convertToDto).orElseThrow();
+        return cvRepository.findById(id).map(cvDtoConverter::convertToDto).orElseThrow(() -> new CvNotFoundException("Could not find CV with id: " + id));
     }
 
     public void deleteCV(Long id) {
