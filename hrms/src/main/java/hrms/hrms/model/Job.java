@@ -2,6 +2,8 @@ package hrms.hrms.model;
 
 import javax.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @NoArgsConstructor
@@ -32,5 +34,6 @@ public class Job extends BaseEntity{
     
 	@ManyToOne()
 	@JoinColumn(name = "job_position_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private JobPosition jobPosition;
 }

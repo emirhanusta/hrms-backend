@@ -16,8 +16,8 @@ public class CreateCandidateRequest {
     private String password;
     @NotNull
     private String dateOfBirth;
-    @NotBlank
-    @Pattern(regexp = "^[0-9]{11}$")
-    private Integer phoneNumber;
+    @NotNull
+    @Pattern(regexp = "^[0-9]{11}$", message = "Phone number must be 11 digits")
+    private String  phoneNumber;
 
 }

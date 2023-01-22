@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class CreateCVRequest {
 
-    @NotBlank
+    @NotNull
     private Long candidateId;
 
     @NotBlank

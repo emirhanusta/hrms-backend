@@ -8,5 +8,5 @@ public class UpdateCandidateRequest {
     private String lastName;
     private String MailAddress;
     private String password;
-    private Integer phoneNumber;
+    private String phoneNumber;
 }

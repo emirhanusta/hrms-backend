@@ -18,5 +18,5 @@ public class EmployerDto {
 
         private String website;
 
-        private Integer phoneNumber;
+        private String phoneNumber;
 }

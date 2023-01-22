@@ -14,8 +14,8 @@ public class CreateEmployerRequest {
     @NotBlank
     private String password;
     @NotBlank
-    @Pattern(regexp = "^[0-9]{11}$")
-    private Integer phoneNumber;
+    @Pattern(regexp = "^[0-9]{11}$", message = "Phone number must be 11 digits")
+    private String phoneNumber;
     @NotBlank
     private String companyName;
 

@@ -24,7 +24,7 @@ public class Candidate extends BaseEntity {
 
 	private String password;
 
-	private Integer phoneNumber;
+	private String  phoneNumber;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cv_id")

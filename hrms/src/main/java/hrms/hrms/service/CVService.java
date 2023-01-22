@@ -8,6 +8,7 @@ import hrms.hrms.exception.CvNotFoundException;
 import hrms.hrms.model.CV;
 import hrms.hrms.repository.CVRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -66,6 +67,10 @@ public class CVService {
     }
 
     public void deleteCV(Long id) {
-        cvRepository.deleteById(id);
+        try {
+            cvRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new CvNotFoundException("Could not find CV with id: " + id);
+        }
     }
 }

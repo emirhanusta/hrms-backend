@@ -12,5 +12,5 @@ public class CandidateDto {
     private String lastName;
     private String MailAddress;
     private String password;
-    private Integer phoneNumber;
+    private String phoneNumber;
 }
