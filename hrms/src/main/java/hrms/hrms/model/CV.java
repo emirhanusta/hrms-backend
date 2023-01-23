@@ -15,6 +15,8 @@ public class CV extends BaseEntity{
 
 	private String coverLetter;
 
+    @OneToOne(mappedBy = "cv")
+    Candidate candidate;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore

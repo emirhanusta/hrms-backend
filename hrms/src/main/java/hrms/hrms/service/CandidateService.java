@@ -51,6 +51,7 @@ public class CandidateService {
             candidate.get().setMailAddress(request.getMailAddress());
             candidate.get().setPassword(request.getPassword());
             candidate.get().setPhoneNumber(request.getPhoneNumber());
+            candidate.get().setDateOfBirth(request.getDateOfBirth());
             candidateRepository.save(candidate.get());
             return candidateDtoConverter.convertToDto(candidate.get());
         } else {
@@ -67,7 +68,15 @@ public class CandidateService {
             throw new CandidateNotFoundException("Could not find candidate with id: " + id);
         }
     }
+    protected Candidate getOneCandidate(Long id) {
+        return candidateRepository.findById(id).orElseThrow(() -> new CandidateNotFoundException("Could not find candidate with id: " + id));
+    }
     public void deleteCandidateById(Long id) {
-        candidateRepository.deleteById(id);
+        Optional<Candidate> candidate = candidateRepository.findById(id);
+        if (candidate.isPresent()) {
+            candidateRepository.delete(candidate.get());
+        } else {
+            throw new CandidateNotFoundException("Could not find candidate with id: " + id);
+        }
     }
 }

@@ -1,10 +1,11 @@
 package hrms.hrms.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+
+import java.util.Date;
 
 @Getter
 @NoArgsConstructor
@@ -18,7 +19,9 @@ public class Candidate extends BaseEntity {
 
 	private String lastName;
 
-	private String dateOfBirth;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date dateOfBirth;
 
 	private String mailAddress;
 
@@ -27,7 +30,9 @@ public class Candidate extends BaseEntity {
 	private String  phoneNumber;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cv_id")
+	@JoinTable(name = "candidate_cv",
+			joinColumns={@JoinColumn(name = "candidate_id", referencedColumnName = "id")},
+			inverseJoinColumns = {@JoinColumn(name = "cv_id", referencedColumnName = "id")})
 	private CV cv;
 
 }

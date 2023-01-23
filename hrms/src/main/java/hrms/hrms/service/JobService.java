@@ -51,6 +51,7 @@ public class JobService {
                 .jobType(createJobRequest.getJobType())
                 .workplaceType(createJobRequest.getWorkplaceType())
                 .jobPosition(jobPositionService.getJobPosition(createJobRequest.getJobPositionId()))
+                .employer(employerService.getEmployer(createJobRequest.getEmployerId()))
                 .build();
         jobRepository.save(job);
         employerService.addJob(createJobRequest.getEmployerId(), job);
@@ -77,6 +78,12 @@ public class JobService {
     }
 
     public void deleteJob(Long id) {
-        jobRepository.deleteById(id);
+        Optional<Job> job = jobRepository.findById(id);
+        if (job.isPresent()) {
+            job.get().getEmployer().getJobs().remove(job.get());
+            jobRepository.deleteById(id);
+        } else {
+            throw new JobNotFoundException("Could not find job with id: " + id);
+        }
     }
 }

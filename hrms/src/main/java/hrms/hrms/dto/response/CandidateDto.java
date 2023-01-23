@@ -3,6 +3,8 @@ package hrms.hrms.dto.response;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 public class CandidateDto {
@@ -13,4 +15,5 @@ public class CandidateDto {
     private String MailAddress;
     private String password;
     private String phoneNumber;
+    private Date dateOfBirth;
 }

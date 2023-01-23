@@ -1,9 +1,11 @@
 package hrms.hrms.service;
 
+import hrms.hrms.dto.converter.JobConverterDto;
 import hrms.hrms.dto.request.CreateEmployerRequest;
 import hrms.hrms.dto.response.EmployerDto;
 import hrms.hrms.dto.converter.EmployerDtoConverter;
 import hrms.hrms.dto.request.UpdateEmployerRequest;
+import hrms.hrms.dto.response.JobDto;
 import hrms.hrms.exception.EmployerNotFoundException;
 import hrms.hrms.model.Employer;
 import hrms.hrms.model.Job;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class EmployerService {
     private final EmployerRepository employerRepository;
     private final EmployerDtoConverter employerDtoConverter;
+    private final JobConverterDto jobConverterDto;
 
     public List<EmployerDto> getAllEmployers() {
         List<Employer> employers = employerRepository.findAll();
@@ -59,12 +62,30 @@ public class EmployerService {
     }
 
     public void deleteEmployer(Long id) {
-        employerRepository.deleteById(id);
+        Optional<Employer> employer = employerRepository.findById(id);
+        if (employer.isPresent()) {
+            employerRepository.delete(employer.get());
+        } else {
+            throw new EmployerNotFoundException("Could not find employer with id: " + id);
+        }
     }
 
+    public List<JobDto> getActiveJobsByEmployerId(Long id) {
+        Optional<Employer> employer = employerRepository.findById(id);
+        if (employer.isPresent()) {
+            List<Job> jobs = employer.get().getJobs().stream().filter(Job::getIsActive).toList();
+            return jobs.stream().map(jobConverterDto::convertToDto).toList();
+        } else {
+            throw new EmployerNotFoundException("Could not find employer with id: " + id);
+        }
+    }
     protected void addJob(Long id,Job job) {
         Employer employer = employerRepository.findById(id).orElseThrow(() -> new EmployerNotFoundException("Could not find employer with id: " + id));
         employer.getJobs().add(job);
         employerRepository.save(employer);
+    }
+
+    protected Employer getEmployer(Long id) {
+        return employerRepository.findById(id).orElseThrow(() -> new EmployerNotFoundException("Could not find employer with id: " + id));
     }
 }

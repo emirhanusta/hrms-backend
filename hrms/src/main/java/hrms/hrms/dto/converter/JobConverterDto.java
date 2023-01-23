@@ -18,6 +18,7 @@ public class JobConverterDto {
                 .jobType(job.getJobType())
                 .workplaceType(job.getWorkplaceType())
                 .jobPositionId(job.getJobPosition().getId())
+                .employerId(job.getEmployer().getId())
                 .build();
     }
 }

@@ -21,7 +21,7 @@ public class Employer extends BaseEntity {
 
 	private String password;
 
-	private Integer phoneNumber;
+	private String phoneNumber;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnore

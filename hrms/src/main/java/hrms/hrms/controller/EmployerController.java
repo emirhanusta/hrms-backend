@@ -3,6 +3,7 @@ package hrms.hrms.controller;
 import hrms.hrms.dto.request.CreateEmployerRequest;
 import hrms.hrms.dto.response.EmployerDto;
 import hrms.hrms.dto.request.UpdateEmployerRequest;
+import hrms.hrms.dto.response.JobDto;
 import hrms.hrms.service.EmployerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,11 @@ public class EmployerController {
     @GetMapping
     ResponseEntity<List<EmployerDto>> getAllEmployers() {
         return ResponseEntity.ok(employerService.getAllEmployers());
+    }
+
+    @GetMapping("getJobs/{id}")
+    ResponseEntity<List<JobDto>> getActiveJobsByEmployerId(@PathVariable Long id) {
+        return ResponseEntity.ok(employerService.getActiveJobsByEmployerId(id));
     }
     @PutMapping("/{id}")
     ResponseEntity<EmployerDto> updateEmployer(@PathVariable Long id,

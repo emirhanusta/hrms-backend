@@ -8,7 +8,6 @@ import hrms.hrms.exception.CvNotFoundException;
 import hrms.hrms.model.CV;
 import hrms.hrms.repository.CVRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +34,7 @@ public class CVService {
                 .languages(languageService.createLanguage(request.getLanguage()))
                 .skills(skillService.createSkill(request.getSkill()))
                 .image(imageService.createImage(request.getImage()))
+                .candidate(candidateService.getOneCandidate(request.getCandidateId()))
                 .build();
         cvRepository.save(cv);
         candidateService.updateCandidateCV(request.getCandidateId(), cv);
@@ -67,10 +67,12 @@ public class CVService {
     }
 
     public void deleteCV(Long id) {
-        try {
+        Optional<CV> cv = cvRepository.findById(id);
+        if (cv.isPresent()) {
+            cv.get().getCandidate().setCv(null);
             cvRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            throw new CvNotFoundException("Could not find CV with id: " + id);
+        } else {
+            throw new CvNotFoundException("Could not find cv with id: " + id);
         }
     }
 }

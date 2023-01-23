@@ -13,6 +13,7 @@ public class CandidateDtoConverter {
         candidateDto.setMailAddress(candidate.getMailAddress());
         candidateDto.setPassword(candidate.getPassword());
         candidateDto.setPhoneNumber(candidate.getPhoneNumber());
+        candidateDto.setDateOfBirth(candidate.getDateOfBirth());
         return candidateDto;
     }
 

@@ -32,8 +32,11 @@ public class Job extends BaseEntity{
 	@Enumerated(EnumType.STRING)
 	private WorkplaceType workplaceType;
     
-	@ManyToOne()
-	@JoinColumn(name = "job_position_id")
+	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private JobPosition jobPosition;
+
+	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private Employer employer;
 }
